@@ -55,6 +55,28 @@ func New(
 	return m
 }
 
+// Return a new Dagger Directory with one new File
+func (m *Go) CreateNewDirectory(
+	// The path of the new File
+	path string,
+	// The plaintext string contents of the new File
+	contents string,
+) *dagger.Directory {
+	return dag.Directory().WithNewFile(path, contents)
+}
+
+// Return a new Dagger Directory by starting with an existing Directory and adding one additional File
+func (m *Go) AddFileToExistingDirectory(
+	// The existing Directory
+	directory *dagger.Directory,
+	// The path of the new File
+	path string,
+	// The plaintext string contents of the new File
+	contents string,
+) *dagger.Directory {
+	return directory.WithNewFile(path, contents)
+}
+
 // Set an environment variable.
 func (m *Go) WithEnvVariable(
 	// The name of the environment variable (e.g., "HOST").
